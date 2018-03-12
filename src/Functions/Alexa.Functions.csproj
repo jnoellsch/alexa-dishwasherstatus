@@ -7,7 +7,7 @@
     <Compile Remove="AssemblyBindingRedirectHelper.cs" />
   </ItemGroup>
   <ItemGroup>    
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.2" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AlexaSkillsKit.NET\AlexaSkillsKit.Lib\AlexaSkillsKit.Lib.csproj" />
