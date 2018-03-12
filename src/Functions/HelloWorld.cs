@@ -1,8 +1,9 @@
 namespace Alexa.Functions
 {
-    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using AlexaSkillsKit.Speechlet;
+    using AlexaSkillsKit.UI;
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Host;
@@ -12,28 +13,41 @@ namespace Alexa.Functions
         [FunctionName("HelloWorld")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
         {
-            log.Info("C# HTTP trigger function processed a request.");
+            log.Info($"Request={req}");
 
-            return req.CreateResponse(HttpStatusCode.OK, new
+            return await new HellowWorldSpeechlet().GetResponseAsync(req);
+        }
+
+        public class HellowWorldSpeechlet : SpeechletAsync
+        {
+            public override async Task<SpeechletResponse> OnIntentAsync(IntentRequest intentRequest, Session session)
             {
-                version = "1.1",
-                sessionAttributes = new { },
-                response = new
+                return new SpeechletResponse();
+            }
+
+            public override async Task<SpeechletResponse> OnLaunchAsync(LaunchRequest launchRequest, Session session)
+            {
+                string text = "Oh, hello there!";
+
+                var speech = new PlainTextOutputSpeech() { Text = text };
+                var card = new SimpleCard() { Title = "Hello!", Content = text };
+                var response = new SpeechletResponse
                 {
-                    outputSpeech = new
-                    {
-                        type = "PlainText",
-                        text = "Oh, hello there!"
-                    },
-                    card = new
-                    {
-                        type = "Simple",
-                        title = "HelloWorldIntent",
-                        content = "Hello!"
-                    },
-                    shouldEndSession = true
-                }
-            });
+                    OutputSpeech = speech,
+                    Card = card,
+                    ShouldEndSession = false
+                };
+
+                return response;
+            }
+
+            public override async Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
+            {
+            }
+
+            public override async Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
+            {
+            }
         }
     }
 }
