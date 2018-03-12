@@ -15,7 +15,7 @@ namespace Alexa.Functions
             dynamic data = await req.Content.ReadAsAsync<object>();
             log.Info($"Alexa request: {data}");
 
-            // Run main speechlet
+            // Run speechlet
             var speechlet = new DishwasherStatusSpeechlet(log);
             return await speechlet.GetResponseAsync(req);
         }

@@ -1,24 +1,21 @@
 ﻿namespace Alexa.Functions
 {
-    using System;
     using System.Threading.Tasks;
     using AlexaSkillsKit.Speechlet;
-    using AlexaSkillsKit.UI;
     using Microsoft.Azure.WebJobs.Host;
-    using Microsoft.Data.Edm.Validation;
 
     public class DishwasherStatusSpeechlet : SpeechletAsync
     {
-        public TraceWriter Log { get; }
+        public DishwasherStatusLogger Log { get; }
 
-        public DishwasherStatusSpeechlet(TraceWriter log)
+        public DishwasherStatusSpeechlet(TraceWriter logWriter)
         {
-            this.Log = log;
+            this.Log = new DishwasherStatusLogger(logWriter);
         }
         
         public override async Task<SpeechletResponse> OnIntentAsync(IntentRequest intentRequest, Session session)
         {
-            this.Log.Info($"OnIntent: intent={intentRequest.Intent.Name} requestId={intentRequest.RequestId}, sessionId={session.SessionId}");
+            this.Log.IntentStart(intentRequest, session);
 
             var factory = new SpeechletFactory();
             var speechlet = factory.CreateFromIntent(intentRequest.Intent);
@@ -27,20 +24,19 @@
 
         public override async Task<SpeechletResponse> OnLaunchAsync(LaunchRequest launchRequest, Session session)
         {
-            this.Log.Info($"OnLaunch: requestId={launchRequest.RequestId}, sessionId={session.SessionId}");
+            this.Log.LaunchStart(launchRequest, session);
+
             return await new WelcomeMessageSubSpeechlet().RespondAsync();
         }
 
-        public override Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
+        public override async Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
         {
-            this.Log.Info($"OnSessionStarted: requestId={sessionStartedRequest.RequestId}, sessionId={session.SessionId}");
-            return null;
+            this.Log.SessionStart(sessionStartedRequest, session);
         }
 
-        public override Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
+        public override async Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
         {
-            this.Log.Info($"OnSesionEnded: requestId={sessionEndedRequest.RequestId}, sesionId={session.SessionId}");
-            return null;
+            this.Log.SessionEnd(sessionEndedRequest, session);
         }
     }
 }
