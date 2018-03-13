@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
-
-namespace Alexa.Functions
+﻿namespace Alexa.Functions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization.Json;
+    using System.Text;
+
     public static class AssemblyBindingRedirectHelper
     {
         ///<summary>
