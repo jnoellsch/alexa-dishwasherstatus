@@ -19,7 +19,7 @@
 
         private CloudTableClient DbClient { get; }
 
-        public async void AddAsync(DishwasherEntity entity)
+        public async Task AddAsync(DishwasherEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -39,7 +39,7 @@
             return result.Result as DishwasherEntity;
         }
 
-        public async void UpdateStatusAsync(string userId, Status status)
+        public async Task UpdateStatusAsync(string userId, Status status)
         {
             // hydrate, update
             var dishwasher = await this.GetByUserAsync(userId);

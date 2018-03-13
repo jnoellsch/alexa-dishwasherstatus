@@ -8,10 +8,10 @@
     /// </summary>
     public interface IDishwasherRepository
     {
-        void AddAsync(DishwasherEntity entity);
+        Task AddAsync(DishwasherEntity entity);
 
         Task<DishwasherEntity> GetByUserAsync(string userId);
 
-        void UpdateStatusAsync(string userId, Status status);
+        Task UpdateStatusAsync(string userId, Status status);
     }
 }
