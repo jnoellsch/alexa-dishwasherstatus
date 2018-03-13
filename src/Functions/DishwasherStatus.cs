@@ -8,12 +8,19 @@ namespace Alexa.Functions
 
     public static class DishwasherStatus
     {
+        static DishwasherStatus()
+        {
+            ApplicationHelper.Startup();
+        }
+
         [FunctionName("DishwasherStatus")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, 
+            TraceWriter log)
         {
             // Get request body
-            dynamic data = await req.Content.ReadAsAsync<object>();
-            log.Info($"Alexa request: {data}");
+            ////dynamic data = await req.Content.ReadAsAsync<object>();
+            ////log.Info($"Alexa request: {data}");
 
             // Run speechlet
             var speechlet = new DishwasherStatusSpeechlet(log);

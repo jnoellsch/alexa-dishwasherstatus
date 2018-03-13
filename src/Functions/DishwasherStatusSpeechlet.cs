@@ -1,6 +1,9 @@
 ﻿namespace Alexa.Functions
 {
+    using System;
     using System.Threading.Tasks;
+    using AlexaSkillsKit.Authentication;
+    using AlexaSkillsKit.Json;
     using AlexaSkillsKit.Speechlet;
     using Microsoft.Azure.WebJobs.Host;
 
@@ -29,14 +32,27 @@
             return await welcomeSpeechlet.RespondAsync();
         }
 
-        public override async Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
+        public override Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
         {
             this.Log.SessionStart(sessionStartedRequest, session);
+            return Task.Delay(0);
         }
 
-        public override async Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
+        public override Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
         {
             this.Log.SessionEnd(sessionEndedRequest, session);
+            return Task.Delay(0);
+        }
+
+        /// <summary>
+        /// TODO: Turn request validation back on before going live.
+        /// </summary>
+        public override bool OnRequestValidation(
+            SpeechletRequestValidationResult result,
+            DateTime referenceTimeUtc,
+            SpeechletRequestEnvelope requestEnvelope)
+        {
+            return true;
         }
     }
 }

@@ -17,23 +17,24 @@
 
         public void LaunchStart(LaunchRequest request, Session session)
         {
-            this.LogWriter.Info($"Launching: requestId={request.RequestId}, sessionId={session.SessionId}");
+            this.LogWriter.Info("Launching...");
+            this.LogWriter.Info($"requestId={request.RequestId}, sessionId={session.SessionId}");
         }
 
         public void IntentStart(IntentRequest request, Session session)
         {
-            this.LogWriter.Info($"Intent: intent={request.Intent.Name} requestId={request.RequestId}, sessionId={session.SessionId}");
+            this.LogWriter.Info("Intent captured!");
+            this.LogWriter.Info($"intent={request.Intent.Name}, requestId={request.RequestId}, sessionId={session.SessionId}");
         }
 
         public void SessionStart(SessionStartedRequest request, Session session)
         {
-            this.LogWriter.Info($"SessionStarted: requestId={request.RequestId}, sessionId={session.SessionId}");
-
+            this.LogWriter.Info("Session started.");
         }
 
         public void SessionEnd(SessionEndedRequest request, Session session)
         {
-            this.LogWriter.Info($"OnSesionEnded: requestId={request.RequestId}, sesionId={session.SessionId}");
+            this.LogWriter.Info("Session ended.");
         }
     }
 }
