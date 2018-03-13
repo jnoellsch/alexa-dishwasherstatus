@@ -5,8 +5,8 @@
     /// </summary>
     public class DirtyStatus : Status
     {
-        public override int Id => 1;
+        public override int Code => 1;
 
-        public override string Value => "dirty";
+        public override string Text => "dirty";
     }
 }

@@ -5,8 +5,8 @@
     /// </summary>
     public class UnknownStatus : Status
     {
-        public override int Id => 0;
+        public override int Code => 0;
 
-        public override string Value => "unknown";
+        public override string Text => "unknown";
     }
 }

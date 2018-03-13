@@ -33,7 +33,7 @@
         public async Task<DishwasherEntity> GetByUserAsync(string userId)
         {
             var table = await this.DbClient.GetTableAsync(TableName);
-            var operation = TableOperation.Retrieve<DishwasherEntity>(DishwasherEntity.ToPartitionKey(userId), DishwasherEntity.ToRowyKey(userId));
+            var operation = TableOperation.Retrieve<DishwasherEntity>(DishwasherEntity.ToPartitionKey(userId), DishwasherEntity.ToRowKey(userId));
             
             var result = await table.ExecuteAsync(operation);
             return result.Result as DishwasherEntity;
@@ -43,7 +43,6 @@
         {
             // hydrate, update
             var dishwasher = await this.GetByUserAsync(userId);
-            dishwasher.Updated = DateTime.UtcNow;
             dishwasher.Status = status;
 
             // persist

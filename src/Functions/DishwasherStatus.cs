@@ -1,5 +1,7 @@
 namespace Alexa.Functions
 {
+    using System;
+    using System.Diagnostics;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Microsoft.Azure.WebJobs;
@@ -23,8 +25,16 @@ namespace Alexa.Functions
             ////log.Info($"Alexa request: {data}");
 
             // Run speechlet
-            var speechlet = new DishwasherStatusSpeechlet(log);
-            return await speechlet.GetResponseAsync(req);
+            try
+            {
+                var speechlet = new DishwasherStatusSpeechlet(log);
+                return await speechlet.GetResponseAsync(req);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
         }
     }
 }
