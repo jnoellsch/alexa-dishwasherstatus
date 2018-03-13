@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaSkillsKit.Lib", "..\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaSkillsKit.Sample", "..\AlexaSkillsKit.NET\AlexaSkillsKit.Sample\AlexaSkillsKit.Sample.csproj", "{9FDEF793-5832-4D37-B0D5-62C55AB1C12E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.Data", "src\Data\Alexa.Data.csproj", "{5C6811AF-EF77-4FEF-99D8-0080229AAFB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9FDEF793-5832-4D37-B0D5-62C55AB1C12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FDEF793-5832-4D37-B0D5-62C55AB1C12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FDEF793-5832-4D37-B0D5-62C55AB1C12E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6811AF-EF77-4FEF-99D8-0080229AAFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6811AF-EF77-4FEF-99D8-0080229AAFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6811AF-EF77-4FEF-99D8-0080229AAFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6811AF-EF77-4FEF-99D8-0080229AAFB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,6 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AlexaSkillsKit.NET\AlexaSkillsKit.Lib\AlexaSkillsKit.Lib.csproj" />
+    <ProjectReference Include="..\Data\Alexa.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
