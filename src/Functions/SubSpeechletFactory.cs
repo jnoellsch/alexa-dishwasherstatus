@@ -29,7 +29,7 @@
                 case "UpdateStateIntent":
                     return new UpdateStateSubSpeechlet(this._repository, this._session, intent);
                 default:
-                    throw new SpeechletException($"The intent '{intentName}' was not on the list and was not processed.");
+                    return new FallbackSubSpeechlet();
             }
         }
     }
