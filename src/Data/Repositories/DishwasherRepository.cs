@@ -19,15 +19,15 @@
 
         private CloudTableClient DbClient { get; }
 
-        public async Task AddAsync(DishwasherEntity entity)
+        public async Task<DishwasherEntity> AddAsync(DishwasherEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            // configure table
             var table = await this.DbClient.GetTableAsync(TableName);
-            var operation = TableOperation.InsertOrReplace(entity);
-            
-            await table.ExecuteAsync(operation);
+            var operation = TableOperation.Insert(entity);
+
+            var result = await table.ExecuteAsync(operation);
+            return result.Result as DishwasherEntity;
         }
 
         public async Task<DishwasherEntity> GetByUserAsync(string userId)
@@ -36,7 +36,9 @@
             var operation = TableOperation.Retrieve<DishwasherEntity>(DishwasherEntity.ToPartitionKey(userId), DishwasherEntity.ToRowKey(userId));
             
             var result = await table.ExecuteAsync(operation);
-            return result.Result as DishwasherEntity;
+            var dishwasher = result.Result as DishwasherEntity ?? new DishwasherEntity { Status = new UnknownStatus() };
+
+            return dishwasher;
         }
 
         public async Task UpdateStatusAsync(string userId, Status status)
