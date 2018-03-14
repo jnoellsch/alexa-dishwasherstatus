@@ -38,9 +38,16 @@
             text = $"Dishwasher is now set to {requestedStatus}";
 
             // respond back to user
-            var speech = new PlainTextOutputSpeech() { Text = text };
-            var card = new SimpleCard() { Title = "Dishwasher Status Update", Content = text };
-            var response = new SpeechletResponse { OutputSpeech = speech, Card = card, ShouldEndSession = false };
+            var response = new SpeechletResponse
+                           {
+                               OutputSpeech = new PlainTextOutputSpeech() { Text = text },
+                               Card = new SimpleCard()
+                                      {
+                                          Title = "Dishwasher Status Update",
+                                          Content = text
+                                      },
+                               ShouldEndSession = false
+                           };
 
             return response;
         }

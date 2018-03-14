@@ -29,14 +29,12 @@ namespace Alexa.Functions
             {
                 string text = "Oh, hello there!";
 
-                var speech = new PlainTextOutputSpeech() { Text = text };
-                var card = new SimpleCard() { Title = "Hello!", Content = text };
                 var response = new SpeechletResponse
-                {
-                    OutputSpeech = speech,
-                    Card = card,
-                    ShouldEndSession = false
-                };
+                               {
+                                   OutputSpeech = new PlainTextOutputSpeech() { Text = text },
+                                   Card = new SimpleCard() { Title = "Hello!", Content = text },
+                                   ShouldEndSession = false
+                               };
 
                 return response;
             }
