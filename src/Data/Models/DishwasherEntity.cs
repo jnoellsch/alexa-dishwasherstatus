@@ -1,5 +1,6 @@
 ﻿namespace Alexa.Data.Models
 {
+    using System;
     using Microsoft.Azure.CosmosDB.Table;
 
     /// <summary>
@@ -7,7 +8,7 @@
     /// </summary>
     public class DishwasherEntity : TableEntity
     {
-        private int _statusCode;
+        private string _statusCode;
         private Status _status;
 
         public DishwasherEntity()
@@ -23,7 +24,7 @@
 
         [IgnoreProperty]
         public string UserId => this.RowKey;
-
+    
         [IgnoreProperty]
         public Status Status
         {
@@ -31,11 +32,11 @@
             set
             {
                 this._status = value;
-                this._statusCode = value.Code;
+                this._statusCode = value.Code.ToString();
             }
         }
 
-        public int StatusCode
+        public string StatusCode
         {
             get => this._statusCode;
             set
@@ -54,6 +55,6 @@
             return userIdNoPrefix.Substring(0, 32);
         }
 
-        public static string ToPartitionKey(string userId) => ToRowKey(userId);
+        public static string ToPartitionKey(string userId) => ToRowKey(userId).Substring(0, 1);
     }
 }

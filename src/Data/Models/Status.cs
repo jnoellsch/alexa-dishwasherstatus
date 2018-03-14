@@ -1,5 +1,7 @@
 ﻿namespace Alexa.Data.Models
 {
+    using System;
+
     /// <summary>
     /// The common signature for dishwasher status.
     /// </summary>
@@ -21,5 +23,7 @@
                     return new UnknownStatus();
             }
         }
+
+        public static Status FromCode(string code) => FromCode(Convert.ToInt32(code));
     }
 }
