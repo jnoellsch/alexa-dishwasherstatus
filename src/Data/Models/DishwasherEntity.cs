@@ -8,7 +8,7 @@
     /// </summary>
     public class DishwasherEntity : TableEntity
     {
-        private string _statusCode;
+        private int _statusCode;
         private Status _status;
 
         public DishwasherEntity()
@@ -32,11 +32,11 @@
             set
             {
                 this._status = value;
-                this._statusCode = value.Code.ToString();
+                this._statusCode = value.Code;
             }
         }
 
-        public string StatusCode
+        public int StatusCode
         {
             get => this._statusCode;
             set

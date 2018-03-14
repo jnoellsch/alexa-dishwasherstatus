@@ -28,7 +28,7 @@
 
         public static Status FromText(string text)
         {
-            switch (text)
+            switch (text.ToLower())
             {
                 case "clean":
                     return new CleanStatus();
