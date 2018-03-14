@@ -25,5 +25,18 @@
         }
 
         public static Status FromCode(string code) => FromCode(Convert.ToInt32(code));
+
+        public static Status FromText(string text)
+        {
+            switch (text)
+            {
+                case "clean":
+                    return new CleanStatus();
+                case "dirty":
+                    return new DirtyStatus();
+                default:
+                    return new UnknownStatus();
+            }
+        }
     }
 }

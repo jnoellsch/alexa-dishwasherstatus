@@ -23,7 +23,7 @@
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var table = await this.DbClient.GetTableAsync(TableName);
+            var table = await this.DbClient.GetTableAsync(TableName);   
             var operation = TableOperation.Insert(entity);
 
             var result = await table.ExecuteAsync(operation);
@@ -43,13 +43,12 @@
 
         public async Task UpdateStatusAsync(string userId, Status status)
         {
-            // hydrate, update
-            var dishwasher = await this.GetByUserAsync(userId);
-            dishwasher.Status = status;
+            // update
+            var dishwasher = new DishwasherEntity(userId) { Status = status };
 
             // persist
             var table = await this.DbClient.GetTableAsync(TableName);
-            var operation = TableOperation.InsertOrReplace(dishwasher);
+            var operation = TableOperation.InsertOrMerge(dishwasher);
 
             await table.ExecuteAsync(operation);
         }
