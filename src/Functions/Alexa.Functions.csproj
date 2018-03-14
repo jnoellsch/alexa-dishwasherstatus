@@ -3,6 +3,7 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>    
+    <PackageReference Include="Microsoft.Azure.CosmosDB.Table" Version="1.1.0" />    
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.9" />    
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
@@ -11,6 +12,9 @@
     <ProjectReference Include="..\Data\Alexa.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Azure.CosmosDB.Table">
+      <HintPath>..\..\packages\Microsoft.Azure.CosmosDB.Table.1.1.0\lib\net45\Microsoft.Azure.CosmosDB.Table.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
