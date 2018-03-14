@@ -16,7 +16,7 @@
         }
         public ISubSpeechlet CreateWelcome()
         {
-            return new WelcomeMessageSubSpeechlet(this._repository, this._session);
+            return new WelcomeMessageSubSpeechlet();
         }
 
         public ISubSpeechlet CreateFromIntent(Intent intent)
@@ -25,7 +25,7 @@
             switch (intentName)
             {
                 case "RetrieveStateIntent":
-                    return new RetrieveStateSubSpeechlet(intent);
+                    return new RetrieveStateSubSpeechlet(this._repository, this._session, intent);
                 case "UpdateStateIntent":
                     return new UpdateStateSubSpeechlet(intent);
                 default:

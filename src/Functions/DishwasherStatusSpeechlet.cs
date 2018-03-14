@@ -34,13 +34,13 @@
 
         public override Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
         {
-            this.Log.SessionStart(sessionStartedRequest, session);
+            ////this.Log.SessionStart(sessionStartedRequest, session);
             return Task.Delay(0);
         }
 
         public override Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
         {
-            this.Log.SessionEnd(sessionEndedRequest, session);
+            ////this.Log.SessionEnd(sessionEndedRequest, session);
             return Task.Delay(0);
         }
 

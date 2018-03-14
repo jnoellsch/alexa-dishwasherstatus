@@ -12,7 +12,7 @@ namespace Alexa.Functions
     {
         static DishwasherStatus()
         {
-            ApplicationHelper.Startup();
+            ////ApplicationHelper.Startup();
         }
 
         [FunctionName("DishwasherStatus")]
