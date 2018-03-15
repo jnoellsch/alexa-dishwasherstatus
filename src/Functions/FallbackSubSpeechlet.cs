@@ -27,7 +27,7 @@
                                ShouldEndSession = false
                            };
 
-            return await Task.FromResult(response);
+            return response;
         }
     }
 }

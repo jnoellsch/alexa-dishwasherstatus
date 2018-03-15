@@ -16,7 +16,7 @@
                                        "dirty dishes aren't loaded alongside already clean dishes."
                                    };
 
-            string text = $"Remember: with my help, we can ensure {signoffs.Random()}.";
+            string text = $"Just remember: with my help, we can ensure {signoffs.Random()}.";
 
             // respond back
             var response = new SpeechletResponse

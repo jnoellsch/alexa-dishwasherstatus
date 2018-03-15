@@ -36,7 +36,8 @@
                     return new StopSubSpeechlet();
                 case "AMAZON.HelpIntent":
                     return new HelpSubSpeechlet();
-                ////case "AMAZON.CancelIntent":
+                case "AMAZON.CancelIntent":
+                    return new NoopSubSpeechlet();
                 default:
                     return new FallbackSubSpeechlet();
             }
