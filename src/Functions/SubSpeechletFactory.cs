@@ -19,32 +19,32 @@
             this._session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
-        public ISubSpeechlet CreateWelcome()
+        public IResponse CreateWelcome()
         {
-            return new WelcomeMessageSubSpeechlet();
+            return new WelcomeMessageResponse();
         }
 
-        public ISubSpeechlet CreateFromIntent(Intent intent)
+        public IResponse CreateFromIntent(Intent intent)
         {
             var intentName = intent.Name;
             switch (intentName)
             {
                 case "RetrieveStateIntent":
-                    return new RetrieveStateSubSpeechlet(this._repository, this._session, intent);
+                    return new RetrieveStateResponse(this._repository, this._session, intent);
                 case "UpdateStateIntent":
-                    return new UpdateStateSubSpeechlet(this._repository, this._session, intent);
+                    return new UpdateStateResponse(this._repository, this._session, intent);
                 case "UnloadIntent":
-                    return new UnloadSubSpeechlet(this._repository, this._session);
+                    return new UnloadResponse(this._repository, this._session);
                 case "StartIntent":
-                    return new StartSubSpeechlet(this._repository, this._session);
+                    return new StartResponse(this._repository, this._session);
                 case "AMAZON.StopIntent":
-                    return new StopSubSpeechlet();
+                    return new StopResponse();
                 case "AMAZON.HelpIntent":
-                    return new HelpSubSpeechlet();
+                    return new HelpResponse();
                 case "AMAZON.CancelIntent":
-                    return new NoopSubSpeechlet();
+                    return new NoopResponse();
                 default:
-                    return new FallbackSubSpeechlet();
+                    return new FallbackResponse();
             }
         }
     }

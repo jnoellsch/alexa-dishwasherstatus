@@ -2,22 +2,21 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Alexa.Data.Models;
     using Alexa.Data.Repositories;
     using AlexaSkillsKit.Slu;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 
     /// <summary>
-    /// Handes the update state intent and as such, sets the status via the user-supplied value.
+    /// Retrieves the current dishwasher state and responds with the result.
     /// </summary>
-    public class UpdateStateSubSpeechlet : ISubSpeechlet
+    public class RetrieveStateResponse : IResponse
     {
         private readonly IDishwasherRepository _repository;
         private readonly Session _session;
-        private Intent _intent;
+        private readonly Intent _intent;
 
-        public UpdateStateSubSpeechlet(IDishwasherRepository repository, Session session, Intent intent)
+        public RetrieveStateResponse(IDishwasherRepository repository, Session session, Intent intent)
         {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             if (session == null) throw new ArgumentNullException(nameof(session));
@@ -33,12 +32,24 @@
             this._intent.Slots.TryGetValue("State", out var stateSlot);
             string text;
 
-            // update status
+            // retrieve status
+            var dishwasher = await this._repository.GetByUserAsync(this._session.User.Id);
+            var currentStatus = dishwasher.Status.Text;
             var requestedStatus = stateSlot?.Value;
-            await this._repository.UpdateStatusAsync(this._session.User.Id, Status.FromText(requestedStatus));
-            
-            // build message
-            text = $"Dishwasher is now set to {requestedStatus}";
+
+            // if slot mentioned, user is trying to be specific in the ask. 
+            // otherwise, it's generic. 
+            if (this.SlotWasSpecified(stateSlot))
+            {
+                string yesNo = this.YesNoBasedOn(requestedStatus, currentStatus);
+                bool shouldNegate = yesNo == "no";
+
+                text = $"{yesNo}. The dishes are {(shouldNegate ? "not" : string.Empty)} {requestedStatus}.";
+            }
+            else
+            {
+                text = $"The status of your dishwasher is {currentStatus}.";
+            }
 
             // respond back
             var response = new SpeechletResponse
@@ -46,7 +57,7 @@
                                OutputSpeech = new PlainTextOutputSpeech() { Text = text },
                                Card = new SimpleCard()
                                       {
-                                          Title = "Dishwasher Status Update",
+                                          Title = "Dishwasher Status Retrieve",
                                           Content = text
                                       },
                                ShouldEndSession = false
@@ -54,5 +65,12 @@
 
             return response;
         }
+
+        private bool SlotWasSpecified(Slot slot) => !string.IsNullOrEmpty(slot?.Value);
+
+        private string YesNoBasedOn(string requested, string actual)
+        {
+            return String.Equals(requested, actual) ? "yes" : "no";
+        } 
     }
 }

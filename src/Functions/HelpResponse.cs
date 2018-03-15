@@ -7,7 +7,7 @@
     /// <summary>
     /// Handles the default help intent by providing useful examples.
     /// </summary>
-    public class HelpSubSpeechlet : ISubSpeechlet
+    public class HelpResponse : IResponse
     {
         public async Task<SpeechletResponse> RespondAsync()
         {

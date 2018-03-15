@@ -8,7 +8,7 @@
     /// <summary>
     /// When all other intents fail...
     /// </summary>
-    public class FallbackSubSpeechlet : ISubSpeechlet
+    public class FallbackResponse : IResponse
     {
         public async Task<SpeechletResponse> RespondAsync()
         {

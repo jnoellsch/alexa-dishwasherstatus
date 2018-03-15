@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines the structure for the small speechlets of functionality.
     /// </summary>
-    public interface ISubSpeechlet
+    public interface IResponse
     {
         Task<SpeechletResponse> RespondAsync();
     }

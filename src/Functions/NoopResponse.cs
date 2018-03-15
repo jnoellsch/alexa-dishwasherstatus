@@ -7,7 +7,7 @@
     /// <summary>
     /// Provides a no words, session-ending repsonse.
     /// </summary>
-    public class NoopSubSpeechlet : ISubSpeechlet
+    public class NoopResponse : IResponse
     {
         public async Task<SpeechletResponse> RespondAsync()
         {

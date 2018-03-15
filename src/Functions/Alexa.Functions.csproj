@@ -27,6 +27,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Responses\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 </Project>

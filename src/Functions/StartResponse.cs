@@ -9,14 +9,15 @@
     using AlexaSkillsKit.UI;
 
     /// <summary>
-    /// Handles the unload intent and as such, sets the dishwasher status to dirty.
+    /// Handles the start intent and as such, sets the dishwasher status to clean.
     /// </summary>
-    public class UnloadSubSpeechlet : ISubSpeechlet
+    public class StartResponse : IResponse
     {
         private readonly IDishwasherRepository _repository;
+
         private readonly Session _session;
 
-        public UnloadSubSpeechlet(IDishwasherRepository repository, Session session)
+        public StartResponse(IDishwasherRepository repository, Session session)
         {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             if (session == null) throw new ArgumentNullException(nameof(session));
@@ -27,18 +28,18 @@
 
         public async Task<SpeechletResponse> RespondAsync()
         {
-            // it's empty or emptying so update status to dirty.
-            await this._repository.UpdateStatusAsync(this._session.User.Id, new DirtyStatus());
+            // it's full and/or running so update status to clean (it'll eventually be).
+            await this._repository.UpdateStatusAsync(this._session.User.Id, new CleanStatus());
             
             // build message
             var salutations = new List<string>()
                               {
-                                  "Don't forget to put any existing dirty dishes into the dishwasher.",
-                                  "If you see any dirty dishes, why not put those in too.",
-                                  "Why not fill it up while you're at it."
+                                  "Thanks for letting me know.",
+                                  "Don't be shy when it's time to unload!",
+                                  "Splish-splash your dishes are taking a bath."
                               };
 
-            string text = $"Thanks! {salutations.Random()}";
+            string text = $"Got it. {salutations.Random()}";
 
             // respond back
             var response = new SpeechletResponse
@@ -46,7 +47,7 @@
                                OutputSpeech = new PlainTextOutputSpeech() { Text = text },
                                Card = new SimpleCard()
                                       {
-                                          Title = "Dishwasher Unload",
+                                          Title = "Dishwasher Start",
                                           Content = text
                                       },
                                ShouldEndSession = false

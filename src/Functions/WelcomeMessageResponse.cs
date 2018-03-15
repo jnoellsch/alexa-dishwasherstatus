@@ -7,7 +7,7 @@ namespace Alexa.Functions
     /// <summary>
     /// Handles the start or welcome intent by providing a brief intro.
     /// </summary>
-    public class WelcomeMessageSubSpeechlet : ISubSpeechlet
+    public class WelcomeMessageResponse : IResponse
     {
         public async Task<SpeechletResponse> RespondAsync()
         {

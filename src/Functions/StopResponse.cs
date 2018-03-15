@@ -8,7 +8,7 @@
     /// <summary>
     /// Handles the stop intent and provides a quick, useful signoff response.
     /// </summary>
-    public class StopSubSpeechlet : ISubSpeechlet
+    public class StopResponse : IResponse
     {
         public async Task<SpeechletResponse> RespondAsync()
         {
