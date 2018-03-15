@@ -11,12 +11,12 @@ namespace Alexa.Functions
     {
         public async Task<SpeechletResponse> RespondAsync()
         {
-            string text = "Welcome to the dishwasher status app. Set the status of the dishwasher by saying the dishes are dirty or the dishes are clean.";
+            string text = "Welcome to the dishwasher status app. I help people in your home know if the dishes are dirty or clean. " + 
+                          "Say 'help' for examples.";
 
             var response = new SpeechletResponse
                            {
                                OutputSpeech = new PlainTextOutputSpeech() { Text = text },
-                               Card = new SimpleCard() { Title = "Welcome!", Content = text },
                                ShouldEndSession = false
                            };
 

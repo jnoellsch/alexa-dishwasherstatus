@@ -51,7 +51,7 @@
                 text = $"The status of your dishwasher is {currentStatus}.";
             }
 
-            // respond back to user
+            // respond back
             var response = new SpeechletResponse
                            {
                                OutputSpeech = new PlainTextOutputSpeech() { Text = text },

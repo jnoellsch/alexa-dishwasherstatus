@@ -28,6 +28,15 @@
                     return new RetrieveStateSubSpeechlet(this._repository, this._session, intent);
                 case "UpdateStateIntent":
                     return new UpdateStateSubSpeechlet(this._repository, this._session, intent);
+                case "UnloadIntent":
+                    return new UnloadSubSpeechlet(this._repository, this._session);
+                case "StartIntent":
+                    return new StartSubSpeechlet(this._repository, this._session);
+                case "AMAZON.StopIntent":
+                    return new StopSubSpeechlet();
+                case "AMAZON.HelpIntent":
+                    return new HelpSubSpeechlet();
+                ////case "AMAZON.CancelIntent":
                 default:
                     return new FallbackSubSpeechlet();
             }

@@ -12,7 +12,11 @@
     {
         public async Task<SpeechletResponse> RespondAsync()
         {
-            var sampleUtterances = new List<string>() { "Set the dishwasher status to dirty", "Are the dishes are clean." };
+            var sampleUtterances = new List<string>()
+                                   {
+                                       "Set the dishwasher status to dirty", 
+                                       "Are the dishes are clean."
+                                   };
 
             string text = "Sorry! I don't know how to handle that. Try saying " + sampleUtterances.Random();
 
