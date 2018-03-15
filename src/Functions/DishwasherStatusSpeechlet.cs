@@ -21,6 +21,7 @@
         {
             this.Log.IntentStart(intentRequest, session);
 
+            // TODO: Wrap intent speechlets in try/catch and log any exceptions
             var intentSpeechlet = new SpeechletFactory(session).CreateFromIntent(intentRequest.Intent);
             return await intentSpeechlet.RespondAsync();
         }
@@ -35,13 +36,11 @@
 
         public override Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
         {
-            ////this.Log.SessionStart(sessionStartedRequest, session);
             return Task.Delay(0);
         }
 
         public override Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
         {
-            ////this.Log.SessionEnd(sessionEndedRequest, session);
             return Task.Delay(0);
         }
 

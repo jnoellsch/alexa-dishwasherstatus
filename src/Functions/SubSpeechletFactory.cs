@@ -43,6 +43,7 @@
                     return new HelpResponse();
                 case "AMAZON.CancelIntent":
                     return new NoopResponse();
+                // TODO: Handle naming of the dishwasher?
                 default:
                     return new FallbackResponse();
             }
