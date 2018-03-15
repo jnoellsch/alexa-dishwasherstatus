@@ -5,6 +5,10 @@
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.Slu;
 
+    /// <summary>
+    /// Generates instances of smaller speechlets of functionality and responses based on 
+    /// the intent provided from Alexa.
+    /// </summary>
     public class SpeechletFactory
     {
         private readonly Session _session;
@@ -14,6 +18,7 @@
         {
             this._session = session ?? throw new ArgumentNullException(nameof(session));
         }
+
         public ISubSpeechlet CreateWelcome()
         {
             return new WelcomeMessageSubSpeechlet();

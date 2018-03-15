@@ -4,7 +4,7 @@
     using Microsoft.Azure.WebJobs.Host;
 
     /// <summary>
-    /// Logging specifically for <see cref="DishwasherStatusSpeechlet"/>.
+    /// Generates logging specifically for <see cref="DishwasherStatusSpeechlet"/>.
     /// </summary>
     public class DishwasherStatusLogger
     {

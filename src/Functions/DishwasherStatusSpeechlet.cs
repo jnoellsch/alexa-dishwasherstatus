@@ -7,6 +7,7 @@
     using AlexaSkillsKit.Speechlet;
     using Microsoft.Azure.WebJobs.Host;
 
+
     public class DishwasherStatusSpeechlet : SpeechletAsync
     {
         public DishwasherStatusSpeechlet(TraceWriter logWriter)

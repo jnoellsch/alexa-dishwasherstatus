@@ -8,6 +8,9 @@
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 
+    /// <summary>
+    /// Handes the update state intent and as such, sets the status via the user-supplied value.
+    /// </summary>
     public class UpdateStateSubSpeechlet : ISubSpeechlet
     {
         private readonly IDishwasherRepository _repository;
@@ -37,7 +40,7 @@
             // build message
             text = $"Dishwasher is now set to {requestedStatus}";
 
-            // respond back to user
+            // respond back
             var response = new SpeechletResponse
                            {
                                OutputSpeech = new PlainTextOutputSpeech() { Text = text },

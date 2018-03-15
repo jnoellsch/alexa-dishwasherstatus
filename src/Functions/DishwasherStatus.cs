@@ -8,22 +8,16 @@ namespace Alexa.Functions
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Host;
 
+    /// <summary>
+    /// The function endpoint to handle incoming requests from Alexa for managing the dishwasher status.
+    /// </summary>
     public static class DishwasherStatus
     {
-        static DishwasherStatus()
-        {
-            ////ApplicationHelper.Startup();
-        }
-
         [FunctionName("DishwasherStatus")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, 
             TraceWriter log)
         {
-            // Get request body
-            ////dynamic data = await req.Content.ReadAsAsync<object>();
-            ////log.Info($"Alexa request: {data}");
-
             // Run speechlet
             try
             {

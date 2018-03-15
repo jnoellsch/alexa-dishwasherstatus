@@ -5,6 +5,9 @@
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 
+    /// <summary>
+    /// Handles the stop intent and provides a quick, useful signoff response.
+    /// </summary>
     public class StopSubSpeechlet : ISubSpeechlet
     {
         public async Task<SpeechletResponse> RespondAsync()

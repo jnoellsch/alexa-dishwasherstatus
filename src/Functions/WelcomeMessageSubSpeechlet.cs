@@ -1,18 +1,17 @@
 namespace Alexa.Functions
 {
-    using System;
     using System.Threading.Tasks;
-    using Alexa.Data.Models;
-    using Alexa.Data.Repositories;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 
+    /// <summary>
+    /// Handles the start or welcome intent by providing a brief intro.
+    /// </summary>
     public class WelcomeMessageSubSpeechlet : ISubSpeechlet
     {
         public async Task<SpeechletResponse> RespondAsync()
         {
-            string text = "Welcome to the dishwasher status app. I help people in your home know if the dishes are dirty or clean. " + 
-                          "Say 'help' for examples.";
+            string text = "Welcome to dishwasher status. I help people in your home track if the dishes are dirty or clean.";
 
             var response = new SpeechletResponse
                            {
