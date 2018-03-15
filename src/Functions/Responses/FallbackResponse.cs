@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Alexa.Functions.Extensions;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 

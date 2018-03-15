@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Alexa.Data.Models;
     using Alexa.Data.Repositories;
+    using Alexa.Functions.Extensions;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
 

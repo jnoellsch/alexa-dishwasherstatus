@@ -1,4 +1,4 @@
-﻿namespace Alexa.Functions
+﻿namespace Alexa.Functions.Extensions
 {
     using System;
     using System.Collections.Generic;
