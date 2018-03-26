@@ -16,10 +16,11 @@
             var sampleUtterances = new List<string>()
                                    {
                                        "Set the dishwasher status to dirty", 
-                                       "Are the dishes are clean."
+                                       "Are the dishes clean?",
+                                       "What is the status?"
                                    };
 
-            string text = "Sorry! I don't know how to handle that. Try saying " + sampleUtterances.Random();
+            string text = "Sorry! I don't know how to handle that. Try saying something like " + sampleUtterances.Random();
 
             var response = new SpeechletResponse
                            {

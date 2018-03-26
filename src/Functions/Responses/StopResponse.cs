@@ -17,7 +17,7 @@
             var signoffs = new List<string>()
                                    {
                                        "dirty dishes don't get accidentally unloaded.",
-                                       "dirty dishes aren't loaded alongside already clean dishes."
+                                       "dirty dishes aren't loaded alongside already clean ones."
                                    };
 
             string text = $"Just remember: with my help, we can ensure {signoffs.Random()}.";

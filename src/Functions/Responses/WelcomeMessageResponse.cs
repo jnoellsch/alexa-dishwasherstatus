@@ -11,7 +11,7 @@ namespace Alexa.Functions
     {
         public async Task<SpeechletResponse> RespondAsync()
         {
-            string text = "Welcome to dishwasher status. I help people in your home track if the dishes are dirty or clean.";
+            string text = "Welcome to dishwasher. I help you track if the dishes are clean or dirty.";
 
             var response = new SpeechletResponse
                            {
