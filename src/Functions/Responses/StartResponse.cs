@@ -1,4 +1,5 @@
-﻿namespace Alexa.Functions
+﻿
+namespace Alexa.Functions
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +16,6 @@
     public class StartResponse : IResponse
     {
         private readonly IDishwasherRepository _repository;
-
         private readonly Session _session;
 
         public StartResponse(IDishwasherRepository repository, Session session)
@@ -31,7 +31,7 @@
         {
             // it's full and/or running so update status to clean (it'll eventually be).
             await this._repository.UpdateStatusAsync(this._session.User.Id, new CleanStatus());
-            
+
             // build message
             var salutations = new List<string>()
                               {

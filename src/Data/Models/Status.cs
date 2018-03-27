@@ -15,6 +15,8 @@
         {
             switch (code)
             {
+                case 2:
+                    return new RunningStatus();
                 case 1:
                     return new CleanStatus();
                 case -1:
@@ -34,6 +36,8 @@
                     return new CleanStatus();
                 case "dirty":
                     return new DirtyStatus();
+                case "running":
+                    return new RunningStatus();
                 default:
                     return new UnknownStatus();
             }

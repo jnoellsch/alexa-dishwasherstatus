@@ -4,6 +4,8 @@
     "AzureWebJobsStorage": "",
     "AzureWebJobsDashboard": "",
     "StorageConnectionString": "UseDevelopmentStorage=true;",  
+    "ServiceBusConnectionString": "Endpoint=sb://alexa-dishwasherstatus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=kQF411Tq3OboFxuMJ75p4A71QtNCEzbADyX9jhCp020=",
+    "PhoneNumbers":  "217.781.0421;217.979.1824", 
     "BindingRedirects": "[ { \"ShortName\": \"Newtonsoft.Json\", \"RedirectToVersion\": \"10.0.0.0\", \"PublicKeyToken\": \"30ad4fe6b2a6aeed\" } ]"
   } 
 }
