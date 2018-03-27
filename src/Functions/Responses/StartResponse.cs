@@ -29,8 +29,8 @@ namespace Alexa.Functions
 
         public async Task<SpeechletResponse> RespondAsync()
         {
-            // it's full and/or running so update status to clean (it'll eventually be).
-            await this._service.UpdateStatusAsync(this._session.User.Id, new CleanStatus());
+            // it's full and/or running so update status
+            await this._service.UpdateStatusAsync(this._session.User.Id, new RunningStatus());
 
             // build message
             var salutations = new List<string>()
