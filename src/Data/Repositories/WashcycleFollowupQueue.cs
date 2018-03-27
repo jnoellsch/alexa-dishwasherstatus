@@ -34,8 +34,8 @@
                 var message = new Message()
                 {
                     ContentType = "application/json",
-                    MessageId = userId,
-                    Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dto)), 
+                    MessageId = Guid.NewGuid().ToString(),
+                    Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dto)) 
                 };
 
                 await this.Client.SendAsync(message);
