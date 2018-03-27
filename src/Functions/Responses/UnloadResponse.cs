@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Alexa.Data.Models;
-    using Alexa.Data.Repositories;
+    using Alexa.Data.Services;
     using Alexa.Functions.Extensions;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
@@ -14,22 +14,22 @@
     /// </summary>
     public class UnloadResponse : IResponse
     {
-        private readonly IDishwasherRepository _repository;
+        private readonly DishwasherService _service;
         private readonly Session _session;
 
-        public UnloadResponse(IDishwasherRepository repository, Session session)
+        public UnloadResponse(DishwasherService service, Session session)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (service == null) throw new ArgumentNullException(nameof(service));
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            this._repository = repository;
+            this._service = service;
             this._session = session;
         }
 
         public async Task<SpeechletResponse> RespondAsync()
         {
             // it's empty or emptying so update status to dirty.
-            await this._repository.UpdateStatusAsync(this._session.User.Id, new DirtyStatus());
+            await this._service.UpdateStatusAsync(this._session.User.Id, new DirtyStatus());
             
             // build message
             var salutations = new List<string>()

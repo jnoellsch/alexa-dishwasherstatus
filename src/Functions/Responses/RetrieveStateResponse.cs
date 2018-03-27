@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Alexa.Data.Repositories;
+    using Alexa.Data.Services;
     using AlexaSkillsKit.Slu;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
@@ -12,17 +12,17 @@
     /// </summary>
     public class RetrieveStateResponse : IResponse
     {
-        private readonly IDishwasherRepository _repository;
+        private readonly DishwasherService _service;
         private readonly Session _session;
         private readonly Intent _intent;
 
-        public RetrieveStateResponse(IDishwasherRepository repository, Session session, Intent intent)
+        public RetrieveStateResponse(DishwasherService service, Session session, Intent intent)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (service == null) throw new ArgumentNullException(nameof(service));
             if (session == null) throw new ArgumentNullException(nameof(session));
             if (intent == null) throw new ArgumentNullException(nameof(intent));
 
-            this._repository = repository;
+            this._service = service;
             this._session = session;
             this._intent = intent;
         }
@@ -33,7 +33,7 @@
             string text;
 
             // retrieve status
-            var dishwasher = await this._repository.GetByUserAsync(this._session.User.Id);
+            var dishwasher = await this._service.GetByUserAsync(this._session.User.Id);
             var currentStatus = dishwasher.Status.Text;
             var requestedStatus = stateSlot?.Value;
 

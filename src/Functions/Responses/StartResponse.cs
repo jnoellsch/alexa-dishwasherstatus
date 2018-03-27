@@ -5,7 +5,7 @@ namespace Alexa.Functions
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Alexa.Data.Models;
-    using Alexa.Data.Repositories;
+    using Alexa.Data.Services;
     using Alexa.Functions.Extensions;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
@@ -15,22 +15,22 @@ namespace Alexa.Functions
     /// </summary>
     public class StartResponse : IResponse
     {
-        private readonly IDishwasherRepository _repository;
+        private readonly DishwasherService _service;
         private readonly Session _session;
 
-        public StartResponse(IDishwasherRepository repository, Session session)
+        public StartResponse(DishwasherService service, Session session)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (service == null) throw new ArgumentNullException(nameof(service));
             if (session == null) throw new ArgumentNullException(nameof(session));
 
-            this._repository = repository;
+            this._service = service;
             this._session = session;
         }
 
         public async Task<SpeechletResponse> RespondAsync()
         {
             // it's full and/or running so update status to clean (it'll eventually be).
-            await this._repository.UpdateStatusAsync(this._session.User.Id, new CleanStatus());
+            await this._service.UpdateStatusAsync(this._session.User.Id, new CleanStatus());
 
             // build message
             var salutations = new List<string>()

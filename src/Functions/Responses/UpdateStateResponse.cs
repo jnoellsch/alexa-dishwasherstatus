@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Alexa.Data.Models;
-    using Alexa.Data.Repositories;
+    using Alexa.Data.Services;
     using AlexaSkillsKit.Slu;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.UI;
@@ -13,17 +13,17 @@
     /// </summary>
     public class UpdateStateResponse : IResponse
     {
-        private readonly IDishwasherRepository _repository;
+        private readonly DishwasherService _service;
         private readonly Session _session;
         private Intent _intent;
 
-        public UpdateStateResponse(IDishwasherRepository repository, Session session, Intent intent)
+        public UpdateStateResponse(DishwasherService service, Session session, Intent intent)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (service == null) throw new ArgumentNullException(nameof(service));
             if (session == null) throw new ArgumentNullException(nameof(session));
             if (intent == null) throw new ArgumentNullException(nameof(intent));
 
-            this._repository = repository;
+            this._service = service;
             this._session = session;
             this._intent = intent;
         }
@@ -35,7 +35,7 @@
 
             // update status
             var requestedStatus = stateSlot?.Value;
-            await this._repository.UpdateStatusAsync(this._session.User.Id, Status.FromText(requestedStatus));
+            await this._service.UpdateStatusAsync(this._session.User.Id, Status.FromText(requestedStatus));
             
             // build message
             text = $"Dishwasher is now set to {requestedStatus}";

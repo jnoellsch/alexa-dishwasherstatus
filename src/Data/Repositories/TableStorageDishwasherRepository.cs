@@ -8,11 +8,11 @@
     /// <summary>
     /// Handles persisted state management for the dishwasher using Azure table storage.
     /// </summary>
-    public class DishwasherRepository : IDishwasherRepository
+    public class TableStorageDishwasherRepository : IDishwasherRepository
     {
         private const string TableName = "dishwashers";
 
-        public DishwasherRepository()
+        public TableStorageDishwasherRepository()
         {
             this.DbClient = TableStorageDb.CreateClient();
         }

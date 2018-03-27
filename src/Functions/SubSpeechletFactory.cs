@@ -2,6 +2,7 @@
 {
     using System;
     using Alexa.Data.Repositories;
+    using Alexa.Data.Services;
     using AlexaSkillsKit.Speechlet;
     using AlexaSkillsKit.Slu;
 
@@ -12,11 +13,12 @@
     public class SpeechletFactory
     {
         private readonly Session _session;
-        private readonly IDishwasherRepository _repository = new DishwasherRepository();
+        private DishwasherService _service;
 
         public SpeechletFactory(Session session)
         {
             this._session = session ?? throw new ArgumentNullException(nameof(session));
+            this._service = new DishwasherService(new TableStorageDishwasherRepository());
         }
 
         public IResponse CreateWelcome()
@@ -30,13 +32,13 @@
             switch (intentName)
             {
                 case "RetrieveStateIntent":
-                    return new RetrieveStateResponse(this._repository, this._session, intent);
+                    return new RetrieveStateResponse(this._service, this._session, intent);
                 case "UpdateStateIntent":
-                    return new UpdateStateResponse(this._repository, this._session, intent);
+                    return new UpdateStateResponse(this._service, this._session, intent);
                 case "UnloadIntent":
-                    return new UnloadResponse(this._repository, this._session);
+                    return new UnloadResponse(this._service, this._session);
                 case "StartIntent":
-                    return new StartResponse(this._repository, this._session);
+                    return new StartResponse(this._service, this._session);
                 case "AMAZON.StopIntent":
                     return new StopResponse();
                 case "AMAZON.HelpIntent":
