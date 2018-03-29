@@ -13,6 +13,7 @@
     public class Program
     {
         private static IQueueClient queueClient;
+        private static ProgramLog log = new ProgramLog();
 
         public static void Main(string[] args)
         {
@@ -30,8 +31,9 @@
         private static async Task MainAsync(IConfigurationRoot configuration)
         {
             // setup client
+            log.Start();
             var connectionString = configuration["Values:ServiceBusConnectionString"];
-            queueClient = new QueueClient(connectionString, "washcycle/$DeadLetterQueue");
+            queueClient = new QueueClient(connectionString, "Values:QueuePath");
 
             // process messages until keypress
             var options = new MessageHandlerOptions(ExceptionReceivedHandler)
@@ -41,9 +43,6 @@
                           };
 
             queueClient.RegisterMessageHandler(ProcessMessageHandlerAsync, options);
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Dishwasher status queue watcher started!");
             Console.ReadKey();
 
             // cleanup
@@ -52,10 +51,7 @@
 
         private static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs args)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"Message handler encounted an exception. :'(");
-            Console.WriteLine($"{args.Exception}");
-            Console.ForegroundColor = ConsoleColor.White;
+            log.ExceptionOccured(args);
 
             return Task.CompletedTask;
         }
@@ -64,13 +60,7 @@
         {
             var dto = JsonConvert.DeserializeObject<WashcycleMessageDto>(Encoding.UTF8.GetString(message.Body)); 
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Message received!");
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"User: {dto.UserId}");
-            Console.WriteLine($"Completes at: {dto.CycleCompletesAt}");
-            Console.WriteLine($"Phone: {dto.Phone}");
+            log.MessageReceived(dto);
 
             await queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }
