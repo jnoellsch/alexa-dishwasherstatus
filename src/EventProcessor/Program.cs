@@ -31,7 +31,7 @@
         {
             // setup client
             var connectionString = configuration["Values:ServiceBusConnectionString"];
-            queueClient = new QueueClient(connectionString, "washcycle");
+            queueClient = new QueueClient(connectionString, "washcycle/$DeadLetterQueue");
 
             // process messages until keypress
             var options = new MessageHandlerOptions(ExceptionReceivedHandler)
