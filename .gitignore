@@ -3,6 +3,7 @@
 
 # Project-specific files
 local.settings.json
+local.settings.config
 
 # User-specific files
 *.suo
