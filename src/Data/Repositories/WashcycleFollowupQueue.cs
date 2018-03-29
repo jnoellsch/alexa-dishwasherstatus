@@ -27,7 +27,7 @@
                 var dto = new WashcycleMessageDto()
                 {
                     UserId = userId,
-                    CycleCompletesAt = DateTime.Now.Add(TimeSpan.FromMinutes(1)),
+                    CycleCompletesAt = DateTime.Now.Add(TimeSpan.FromSeconds(10)),
                     Phone = phone
                 };
 

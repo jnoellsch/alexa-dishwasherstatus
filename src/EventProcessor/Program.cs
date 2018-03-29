@@ -14,6 +14,7 @@
     {
         private static IQueueClient queueClient;
         private static ProgramLog log = new ProgramLog();
+        private static IConfigurationRoot configuration;
 
         public static void Main(string[] args)
         {
@@ -22,18 +23,18 @@
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true);
 
-            var configuration = builder.Build();
+            configuration = builder.Build();
 
             // start
-            MainAsync(configuration).GetAwaiter().GetResult();
+            MainAsync().GetAwaiter().GetResult();
         }
 
-        private static async Task MainAsync(IConfigurationRoot configuration)
+        private static async Task MainAsync()
         {
             // setup client
             log.Start();
             var connectionString = configuration["Values:ServiceBusConnectionString"];
-            queueClient = new QueueClient(connectionString, "Values:QueuePath");
+            queueClient = new QueueClient(connectionString, configuration["Values:QueuePath"]);
 
             // process messages until keypress
             var options = new MessageHandlerOptions(ExceptionReceivedHandler)
@@ -58,10 +59,22 @@
 
         private static async Task ProcessMessageHandlerAsync(Message message, CancellationToken cancellationToken)
         {
+            // retrieve
             var dto = JsonConvert.DeserializeObject<WashcycleMessageDto>(Encoding.UTF8.GetString(message.Body)); 
-
             log.MessageReceived(dto);
 
+            // send notification    
+            var settings = new TwilioSettings()
+                           {
+                               AccountSid = configuration["Values:TwilioAccountSid"],
+                               AuthToken = configuration["Values:TwilioAuthToken"],
+                               From = configuration["Values:TwilioFromPhoneNumber"]
+                           };
+
+            var texter = new TwilioTextMessager(settings, dto.Phone);
+            await texter.SendMessage($"Your dishwasher's wash cycle completed at {dto.CycleCompletesAt:t}. Ready to unload?");
+
+            // dequeue
             await queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }
     }
